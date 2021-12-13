@@ -8,14 +8,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "12.0.7",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.2.3",
+    "@types/react-dom": "^17.0.11",
+    "axios": "^0.24.0",
+    "next": "^12.0.7",
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "reset-css": "^5.0.1",
+    "stylelint": "^14.1.0",
+    "stylelint-config-concentric-order": "^5.0.0"
   },
   "devDependencies": {
-    "@types/node": "16.11.12",
-    "@types/react": "17.0.37",
-    "eslint": "8.4.1",
+    "eslint": "^8.4.1",
     "eslint-config-next": "12.0.7",
     "typescript": "4.5.3"
   }
