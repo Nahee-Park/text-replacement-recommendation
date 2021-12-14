@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { AbstractApi } from './AbstractApi';
+import { AbstractApi, CommonResponse } from './AbstractApi';
 
-const BASE_URL = 'https://emoji-recommendation.web.app';
+const BASE_URL = 'https://asia-northeast3-text-replacement-ff7ff.cloudfunctions.net/api';
 
 export type EmojiType = {
   imageUrl: string | undefined;
@@ -9,9 +9,11 @@ export type EmojiType = {
 };
 
 export type GetEmojiApiResponse = {
-  keyword: string;
-  emoji: EmojiType[];
-};
+  data: {
+    keyword: string;
+    emoji: EmojiType[];
+  };
+} & CommonResponse;
 
 export class EmojiApi extends AbstractApi {
   public static async GetEmojiApi(searchinput: string): Promise<GetEmojiApiResponse | any> {

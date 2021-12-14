@@ -4,6 +4,11 @@ interface QueryType {
   [key: string]: PossibleQueryType;
 }
 
+export type CommonResponse = {
+  status: number;
+  success: boolean;
+  message: string;
+};
 export abstract class AbstractApi {
   protected constructor() {}
 
