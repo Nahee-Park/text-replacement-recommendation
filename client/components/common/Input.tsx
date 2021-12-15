@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
-
+import { debounce } from 'lodash';
 interface InputStyleProps {
   height: string;
   width: string;
@@ -8,28 +8,44 @@ interface InputStyleProps {
 interface InputProps extends InputStyleProps {
   type: string;
   name: string;
-  value: string;
-  setValue: (value: string) => void;
-  // ref: React.MutableRefObject<null>;
+  setValue: Dispatch<SetStateAction<string | undefined>>;
+  submitHandler: () => void;
 }
 
-function Input({ type, name, height, width, value, setValue }: InputProps) {
+const Input = ({ type, name, height, width, setValue, submitHandler }: InputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement;
-    setValue(target.value);
+    debounceOnChange();
   };
 
-  return <Styled.Input height={height} width={width} type={type} name={name} value={value} onChange={changeHandler} />;
-}
+  const debounceOnChange = debounce(() => {
+    setValue(inputRef?.current?.value);
+  }, 300);
 
+  return (
+    <Styled.Form onSubmit={submitHandler} height={height} width={width}>
+      <input className="input" type={type} name={name} onChange={changeHandler} ref={inputRef} />
+    </Styled.Form>
+  );
+};
 export default Input;
 
 const Styled = {
-  Input: styled.input<InputStyleProps>`
-    background: #e5e5e5;
-    border-radius: 12px;
+  Form: styled.form<InputStyleProps>`
     height: ${({ height }) => height};
     width: ${({ width }) => width};
-    border: 0 solid white;
+    background: #e5e5e5;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .input {
+      width: 95%;
+      height: 100%;
+      background: #e5e5e5;
+      border-radius: 12px;
+      border: 0 solid white;
+    }
   `,
 };

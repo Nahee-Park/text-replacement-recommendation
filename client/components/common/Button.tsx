@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 export type sizeType = 'sm' | 'md' | 'lg';
 
 interface ButtonStyleProps {
@@ -25,7 +26,21 @@ const Styled = {
   Button: styled.button<ButtonStyleProps>`
     border-radius: 12px;
     background: ${({ color }) => color};
-    ${({ size }) => ('sm' ? 'width: 90px; height: 35px;' : 'md' ? 'width: 106px; height: 45px;' : 'width: 130px; height: 55px;')}
+    ${({ size }) =>
+      size === 'sm'
+        ? css`
+            width: 90px;
+            height: 35px;
+          `
+        : size === 'md'
+        ? css`
+            width: 106px;
+            height: 45px;
+          `
+        : css`
+            width: 130px;
+            height: 55px;
+          `}
     color: #FFFFFF;
     size: 21px;
     font-family: Roboto Mono Light for Powerline;
