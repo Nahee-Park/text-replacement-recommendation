@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Button from '../common/Button';
 import { EmojiApi } from '../../lib/EmojiApi';
 import Input from '../common/Input';
+import useEmojiDatas from '../../hooks/useEmojiDatas';
 
 function SearchBar() {
+  const { setEmojiData } = useEmojiDatas();
   const [searchValue, setSearchValue] = useState<string | undefined>('');
 
   const clickHandler = () => {
